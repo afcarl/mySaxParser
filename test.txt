@@ -1,0 +1,26 @@
+<main title="main" color="red">
+    <person>
+        <name>DAn</name>
+        <age>23</age>
+    </person>
+    <age>89</age>
+
+    <person>
+        <name>Den</name>
+        <age>20</age>
+        <gender>Male</gender>
+    </person>
+
+
+    <person>
+        <name>DAh</name>
+        <age>25</age>
+    </person>
+
+
+    <person>
+        <name>DAzzz</name>
+        <name>Pakhomov</name>
+        <age>21</age>
+    </person>
+</main>
