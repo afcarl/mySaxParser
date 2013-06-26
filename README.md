@@ -38,7 +38,8 @@ public class PersonModel
 
 ```
 
-Define sax parser handler class that implements SaxHandler interface :
+Define sax parser handler class that implements `SaxHandler` interface.
+You should implement `startDocument`, `endDocument`, `characters`, `startElement`, `endElement` methods.
 
 ```java
 
@@ -96,7 +97,7 @@ public class PersonHandler implements SaxHandler
         }
     }
     
-    /...
+    //...
     
 }
 
