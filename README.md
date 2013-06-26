@@ -10,23 +10,96 @@ Example
 Define entity model class: 
 
 ```java
-public class EntityModel
+public class PersonModel
 {
-    private String entityProperty1;
-    private String entityProperty2;
+    private List<String> names;
+    private String address;
+    private String gender;
+    private int age;
     
-    public int getEntityProperty1()
+    public PersonModel()
     {
-        return this.entityProperty1;
+        this.names = new LinkedList<String>();
     }
 
-    public void getEntityProperty2(int newProperty)
+    public int getAge()
     {
-        this.entityProperty1 = newProperty;
+        return age;
+    }
+
+    public void setAge(int age)
+    {
+        this.age = age;
     }
     
     //...
+    
 }
 
 ```
+
+Define sax parser handler class that implements SaxHandler interface :
+
+```java
+
+public class PersonHandler implements SaxHandler
+{
+    private List<PersonModel> people;
+    private PersonModel currentPerson;
+    private boolean insidePersonNode;
+    private boolean insidePersonNameNode;
+    private boolean insidePersonAgeNode;
+    private boolean insidePersonGenderNode;
+    private boolean insidePersonAddressNode;
+
+    public void startDocument()
+    {
+        this.people = new LinkedList<PersonModel>();
+        System.out.println("document start");
+    }
+
+    public void endDocument()
+    {
+        System.out.println("document end");
+
+        for (PersonModel person : this.people)
+        {
+            System.out.println( person.toString() );
+        }
+    }
+
+    public void characters(String textNode)
+    {
+        if (this.insidePersonAgeNode)
+        {
+            int age = Integer.parseInt(textNode);
+            this.currentPerson.setAge(age);
+            return;
+        }
+
+        if (this.insidePersonGenderNode)
+        {
+            this.currentPerson.setGender(textNode);
+            return;
+        }
+
+        if (this.insidePersonNameNode)
+        {
+            this.currentPerson.addName(textNode);
+            return;
+        }
+
+        if (this.insidePersonAddressNode)
+        {
+            this.currentPerson.setAddress(textNode);
+            return;
+        }
+    }
+    
+    /...
+    
+}
+
+```
+
 
