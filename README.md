@@ -39,7 +39,7 @@ public class PersonModel
 ```
 
 Define sax parser handler class that implements `SaxHandler` interface.
-You should implement `startDocument`, `endDocument`, `characters`, `startElement`, `endElement` methods.
+You should implement `startDocument`, `endDocument`, `characters`, `startElement`, `endElement` methods:
 
 ```java
 
@@ -103,4 +103,56 @@ public class PersonHandler implements SaxHandler
 
 ```
 
+And launch it:
 
+```java
+SaxHandler handler = new PersonHandler();
+
+SaxParser test = new SaxParser(fullFilePath, handler);
+
+test.parse();
+
+```
+
+input:
+
+```xml
+<main title="main" color="red">
+    <person>
+        <name>DAn</name>
+        <age>23</age>
+    </person>
+    <age>89</age>
+
+    <person>
+        <name>Den</name>
+        <age>20</age>
+        <gender>Male</gender>
+    </person>
+
+
+    <person>
+        <name>DAh</name>
+        <age>25</age>
+    </person>
+
+
+    <person>
+        <name>DAzzz</name>
+        <name>Pakhomov</name>
+        <age>21</age>
+    </person>
+</main>
+
+```
+
+output:
+
+```
+document start
+document end
+PersonModel{names= DAn, address='null', gender='null', age=23}
+PersonModel{names= Den, address='null', gender='Male', age=20}
+PersonModel{names= DAh, address='null', gender='null', age=25}
+PersonModel{names= DAzzz Pakhomov, address='null', gender='null', age=21}
+```
